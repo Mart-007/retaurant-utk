@@ -1,0 +1,40 @@
+.order {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  height: 100%;
+  width: 100%;
+
+  .navigation {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    span:hover {
+      padding: 2px;
+      border-radius: 5px;
+      background-color: #0842a0;
+      cursor: pointer;
+    }
+  }
+
+  .items {
+    border: solid 1px #041e49;
+    // padding: 10px 0 0 10px;
+    width: 100%;
+    .add-btn {
+      background: #041e49;
+    }
+    .ant-btn {
+      margin: 10px;
+      border: solid 1px #041e49;
+      color: #d3e3fd;
+      background: none;
+      float: right;
+    }
+    .ant-btn:hover {
+      background: none;
+    }
+  }
+}

@@ -6,4 +6,5 @@ export const {
   MESSAGING_SENDING_ID,
   APP_ID,
   MEAUREMENT_ID,
+  // eslint-disable-next-line no-undef
 } = process.env;

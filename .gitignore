@@ -25,3 +25,9 @@ dist-ssr
 
 # dotenv environment variable file
 *.env
+
+# firebase artifacts
+.firebase/
+
+# unwanted lock files
+yarn-lock

@@ -1,9 +1,12 @@
+import Header from './components/Header';
+import Order from './components/body';
+
 function App() {
   return (
     <>
       <div className="container">
-        <div className="header">Mart Restaurant</div>
-        <div className="body">body</div>
+        <Header />
+        <Order />
       </div>
     </>
   );
