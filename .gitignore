@@ -24,7 +24,7 @@ dist-ssr
 *.sw?
 
 # dotenv environment variable file
-*.env
+.env
 
 # firebase artifacts
 .firebase/
