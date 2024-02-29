@@ -38,7 +38,7 @@ const Items = () => {
   }, []);
 
   useEffect(() => {
-    if (isEdit && itemData) {
+    if (!isEdit && itemData) {
       itemData.map(data => {
         setItems({
           category: data.category,
@@ -51,7 +51,7 @@ const Items = () => {
       });
     }
   }, [itemData]);
-  console.log('items:', items);
+
   const handleChange = e => {
     const { name, value } = e.target;
 
@@ -83,7 +83,7 @@ const Items = () => {
   };
 
   const onClickSave = () => {
-    if (isEdit) {
+    if (!isEdit) {
       const ItemsDao = new ItemsDAO();
       ItemsDao.updateItem(itemData.itemId, { items });
       message.success('Edit Success');
@@ -110,7 +110,7 @@ const Items = () => {
         {/* <FontAwesomeIcon icon="fas fa-check-circle" />  */}Add Items
       </Button>
       <Modal
-        title={!isEdit ? 'Add Items' : 'Edit Items'}
+        title={isEdit ? 'Add Items' : 'Edit Items'}
         open={isOpenModal}
         onOk={onClickSave}
         onCancel={handleCancelModal}
