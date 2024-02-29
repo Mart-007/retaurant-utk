@@ -13,7 +13,7 @@ import {
 
 class Items {
   constructor() {
-    this.multipleItemsPath = `RESTAURANT-UTK/ITEMS`;
+    this.multipleItemsPath = `RESTAURANT-UTK`;
   }
 
   getItem(fnCallback) {

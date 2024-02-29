@@ -36,5 +36,87 @@
     .ant-btn:hover {
       background: none;
     }
+    .item-list-container {
+      display: flex;
+      flex-direction: row;
+      .item-list {
+        margin: 20px;
+        padding: 16px 16px 8px 16px;
+        width: 200px;
+        border: solid 1px #041e49;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .name-size,
+        .price,
+        .cost,
+        .amount_in_stock {
+          padding-bottom: 5px;
+          border-bottom: solid 1px #041e49;
+        }
+        .name-size,
+        .price,
+        .cost,
+        .amount_in_stock {
+          color: #bbc8dc;
+          display: flex;
+          justify-content: space-between;
+          font-size: 13px;
+          gap: 10px;
+        }
+
+        .button {
+          display: flex;
+          flex-direction: row;
+          gap: 10px;
+          :first-child {
+            border: solid 1px #f93d56;
+            padding: 0 14px;
+            width: 100px;
+            border: none;
+            padding-left: -50px;
+            margin: 0;
+            text-align: left;
+            span {
+              text-align: center;
+              border: none;
+              color: #f93d56;
+              padding: 0;
+              margin: 0;
+            }
+          }
+          // :first-child:hover {
+          //   color: #bbc8dc;
+          //   background: #f93d56;
+          //   border: solid 1px #f9a5b1;
+          //   span {
+          //     border: none;
+          //     color: #bbc8dc;
+          //   }
+          // }
+
+          :last-child {
+            background: solid 1px #bbc8dc;
+            padding: 0 16px;
+            width: 100px;
+            border: none;
+            padding: 0;
+            margin: 0;
+            span {
+              border: none;
+              color: #0b3d88;
+            }
+          }
+          // :last-child:hover {
+          //   background: #041e49;
+          //   padding: 0 16px;
+          //   span {
+          //     border: none;
+          //     color: #bbc8dc;
+          //   }
+          // }
+        }
+      }
+    }
   }
 }
