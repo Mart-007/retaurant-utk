@@ -28,7 +28,7 @@ const ItemList = ({ itemData, deleteItem, handleEdit }) => {
             <Button className="delete" onClick={() => deleteItem(data.itemId)}>
               Delete
             </Button>
-            <Button className="edit" onClick={handleEdit}>
+            <Button className="edit" onClick={() => handleEdit(data)}>
               Edit
             </Button>
           </div>

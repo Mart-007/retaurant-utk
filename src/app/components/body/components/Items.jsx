@@ -11,6 +11,7 @@ const Items = () => {
   const [isEdit, setIsEdit] = useState(false);
 
   const [itemData, setItemData] = useState([]);
+  const [itemId, setItemId] = useState('');
 
   const [items, setItems] = useState({
     category: '',
@@ -37,22 +38,6 @@ const Items = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (isEdit === true && itemData.length) {
-      itemData.forEach(data => {
-        console.log('data:', data);
-        setItems({
-          category: data.category,
-          name: data.name,
-          size: data.size,
-          price: data.price,
-          cost: data.cost,
-          amount_in_stock: data.amount_in_stock,
-        });
-      });
-    }
-  }, []);
-
   const handleChange = e => {
     const { name, value } = e.target;
     if ((name === 'cost' || name === 'price' || name === 'cost_in_stock') && isNaN(value)) {
@@ -73,7 +58,7 @@ const Items = () => {
     setIsOpenModal(true);
   };
 
-  const handleCancelModal = () => {
+  const handleCloseModal = () => {
     handleClear();
     setIsOpenModal(false);
   };
@@ -88,7 +73,8 @@ const Items = () => {
   const onClickSave = () => {
     if (isEdit === true) {
       const ItemsDao = new ItemsDAO();
-      ItemsDao.updateItem(itemData.itemId, { items });
+      ItemsDao.updateItem(itemId, items);
+      handleCloseModal();
       setIsEdit(false);
       handleClear();
       message.success('Edit Success');
@@ -97,8 +83,17 @@ const Items = () => {
     }
   };
 
-  const handleEdit = () => {
+  const handleEdit = selectedItem => {
     setIsEdit(true);
+    setItemId(selectedItem.itemId);
+    setItems({
+      category: selectedItem.category,
+      name: selectedItem.name,
+      size: selectedItem.size,
+      price: selectedItem.price,
+      cost: selectedItem.cost,
+      amount_in_stock: selectedItem.amount_in_stock,
+    });
     handleOpenModal();
   };
 
@@ -135,7 +130,7 @@ const Items = () => {
         title={isEdit === false ? 'Add Items' : 'Edit Items'}
         open={isOpenModal}
         onOk={onClickSave}
-        onCancel={handleCancelModal}
+        onCancel={handleCloseModal}
         okText="Save"
       >
         <AddItem handleChange={handleChange} handleSelectItem={handleSelectItem} items={items} />
