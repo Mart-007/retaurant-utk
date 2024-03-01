@@ -20,25 +20,34 @@
   }
 
   .items {
-    border: solid 1px #041e49;
-    // padding: 10px 0 0 10px;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
     .add-btn {
       background: #041e49;
+      color: #d3e3fd;
     }
     .ant-btn {
-      margin: 10px;
+      margin: 20px;
       border: solid 1px #041e49;
-      color: #d3e3fd;
       background: none;
-      float: right;
+      width: 150px;
     }
     .ant-btn:hover {
       background: none;
     }
+    .disable-add-btn {
+      color: #0b3477;
+    }
+    .disable-add-btn:hover {
+      border: solid 1px #0a2e67;
+      color: #0b3477;
+    }
     .item-list-container {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+
       .item-list {
         margin: 20px;
         padding: 16px 16px 8px 16px;
@@ -46,6 +55,7 @@
         border: solid 1px #041e49;
         display: flex;
         flex-direction: column;
+
         gap: 10px;
         .name-size,
         .price,
@@ -80,20 +90,15 @@
             span {
               text-align: center;
               border: none;
-              color: #f93d56;
+              color: #c52a3e;
               padding: 0;
               margin: 0;
             }
           }
-          // :first-child:hover {
-          //   color: #bbc8dc;
-          //   background: #f93d56;
-          //   border: solid 1px #f9a5b1;
-          //   span {
-          //     border: none;
-          //     color: #bbc8dc;
-          //   }
-          // }
+          :first-child:hover > span {
+            border: none;
+            color: #f93d56;
+          }
 
           :last-child {
             background: solid 1px #bbc8dc;
@@ -107,14 +112,10 @@
               color: #0b3d88;
             }
           }
-          // :last-child:hover {
-          //   background: #041e49;
-          //   padding: 0 16px;
-          //   span {
-          //     border: none;
-          //     color: #bbc8dc;
-          //   }
-          // }
+          :last-child:hover > span {
+            border: none;
+            color: #2463c1;
+          }
         }
       }
     }

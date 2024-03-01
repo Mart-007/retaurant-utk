@@ -3,13 +3,13 @@ import AddItem from './modal/AddItem';
 import { useEffect, useRef, useState } from 'react';
 import ItemsDAO from '../../../../shared/utils/dao/Items';
 import ItemList from './ItemList';
+import { isEmpty } from 'lodash';
 
 const Items = () => {
   const Items = useRef(null);
 
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-
   const [itemData, setItemData] = useState([]);
   const [itemId, setItemId] = useState('');
 
@@ -55,6 +55,11 @@ const Items = () => {
   };
 
   const handleOpenModal = () => {
+    if (itemData.length >= 10) {
+      setIsOpenModal(false);
+      message.error('Exceed limit, Item should not more than 10.');
+      return;
+    }
     setIsOpenModal(true);
   };
 
@@ -64,6 +69,17 @@ const Items = () => {
   };
 
   const handleSave = () => {
+    const { category, name, cost, price, amount_in_stock } = items;
+    if (
+      isEmpty(category) ||
+      isEmpty(name) ||
+      isEmpty(cost) ||
+      isEmpty(price) ||
+      isEmpty(amount_in_stock)
+    ) {
+      message.error('Fields should not be empty.');
+      return;
+    }
     Items.current.createItem(items);
     handleClear();
     setIsOpenModal(false);
@@ -123,8 +139,11 @@ const Items = () => {
 
   return (
     <div className="items">
-      <Button className="add-btn" onClick={handleOpenModal}>
-        Add Items
+      <Button
+        className={`${itemData.length >= 10 ? 'disable-add-btn' : 'add-btn'}`}
+        onClick={handleOpenModal}
+      >
+        + Add Items
       </Button>
       <Modal
         title={isEdit === false ? 'Add Items' : 'Edit Items'}
