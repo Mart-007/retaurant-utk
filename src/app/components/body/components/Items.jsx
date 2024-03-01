@@ -16,9 +16,9 @@ const Items = () => {
     category: '',
     name: '',
     size: '',
-    price: 0,
-    cost: 0,
-    amount_in_stock: 0,
+    price: '',
+    cost: '',
+    amount_in_stock: '',
   });
 
   useEffect(() => {
@@ -38,8 +38,9 @@ const Items = () => {
   }, []);
 
   useEffect(() => {
-    if (!isEdit && itemData) {
-      itemData.map(data => {
+    if (isEdit === true && itemData.length) {
+      itemData.forEach(data => {
+        console.log('data:', data);
         setItems({
           category: data.category,
           name: data.name,
@@ -50,11 +51,13 @@ const Items = () => {
         });
       });
     }
-  }, [itemData]);
+  }, []);
 
   const handleChange = e => {
     const { name, value } = e.target;
-
+    if ((name === 'cost' || name === 'price' || name === 'cost_in_stock') && isNaN(value)) {
+      return message.error('Input must be a number.');
+    }
     setItems(prev => ({ ...prev, [name]: value }));
   };
 
@@ -63,7 +66,7 @@ const Items = () => {
   };
 
   const handleClear = () => {
-    setItems({ category: '', name: '', size: 'Small', price: 0, cost: 0, amount_in_stock: 0 });
+    setItems({ category: '', name: '', size: 'Small', price: '', cost: '', amount_in_stock: '' });
   };
 
   const handleOpenModal = () => {
@@ -83,9 +86,11 @@ const Items = () => {
   };
 
   const onClickSave = () => {
-    if (!isEdit) {
+    if (isEdit === true) {
       const ItemsDao = new ItemsDAO();
       ItemsDao.updateItem(itemData.itemId, { items });
+      setIsEdit(false);
+      handleClear();
       message.success('Edit Success');
     } else {
       handleSave();
@@ -104,13 +109,30 @@ const Items = () => {
     });
   };
 
+  const handleDelete = itemId => {
+    Modal.confirm({
+      className: 'delete-item',
+      title: 'Delete item',
+      okText: 'Delete',
+      cancelText: 'Cancel',
+      content: <>Are you sure you want to delete this item?</>,
+      onOk: () => {
+        deleteItem(itemId);
+      },
+      onCancel: () => {
+        handleClear();
+        console.log('Cancel');
+      },
+    });
+  };
+
   return (
     <div className="items">
       <Button className="add-btn" onClick={handleOpenModal}>
-        {/* <FontAwesomeIcon icon="fas fa-check-circle" />  */}Add Items
+        Add Items
       </Button>
       <Modal
-        title={isEdit ? 'Add Items' : 'Edit Items'}
+        title={isEdit === false ? 'Add Items' : 'Edit Items'}
         open={isOpenModal}
         onOk={onClickSave}
         onCancel={handleCancelModal}
@@ -119,7 +141,7 @@ const Items = () => {
         <AddItem handleChange={handleChange} handleSelectItem={handleSelectItem} items={items} />
       </Modal>
       <div className="item-list-container">
-        <ItemList itemData={itemData} deleteItem={deleteItem} handleEdit={handleEdit} />
+        <ItemList itemData={itemData} deleteItem={handleDelete} handleEdit={handleEdit} />
       </div>
     </div>
   );

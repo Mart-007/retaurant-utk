@@ -28,6 +28,16 @@ body {
   background: #041e49;
 }
 
+.ant-modal-confirm-paragraph {
+  color: #d3e3fd;
+}
+
+.ant-modal-wrap {
+  .delete-item {
+    color: #d3e3fd;
+  }
+}
+
 .ant-modal-content {
   .ant-modal-header {
     .ant-modal-title {
@@ -40,6 +50,26 @@ body {
     display: none;
   }
   .ant-modal-body {
+    .ant-modal-confirm-body-wrapper {
+      padding: 20px;
+      .ant-modal-confirm-btns {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+      }
+      .ant-modal-confirm-body {
+        .ant-modal-confirm-paragraph {
+          text-align: center;
+          .ant-modal-confirm-content {
+            color: #d3e3fd;
+          }
+        }
+        span {
+          display: none;
+        }
+      }
+    }
     border: solid 1px #da1919;
     background: none;
     border: none;

@@ -31,26 +31,23 @@ function AddItem({ handleChange, handleSelectItem, items }) {
       <Input
         className="price"
         name="price"
-        type="number"
         value={items.price}
         onChange={e => handleChange(e)}
-        placeholder="0"
+        placeholder="price"
       />
       <Input
         className="cost"
         name="cost"
-        type="number"
         value={items.cost}
         onChange={e => handleChange(e)}
-        placeholder="0"
+        placeholder="cost"
       />
       <Input
         className="amount_in_stock"
         name="amount_in_stock"
-        type="number"
         value={items.amount_in_stock}
         onChange={e => handleChange(e)}
-        placeholder="0"
+        placeholder="amount in stock"
       />
     </div>
   );
